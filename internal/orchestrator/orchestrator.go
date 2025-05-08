@@ -140,7 +140,7 @@ func (o *Orchestrator) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Printf("Failed to create user: %v", err)
-		http.Error(w, `{"error":"Internal server error"}`, http.StatusInternalServerError)
+		http.Error(w, `{"error":"User already exists"}`, http.StatusConflict)
 		return
 	}
 
@@ -175,7 +175,7 @@ func (o *Orchestrator) LoginHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Printf("Failed to get user: %v", err)
-		http.Error(w, `{"error":"Internal server error"}`, http.StatusInternalServerError)
+		http.Error(w, `{"error":"Invalid credentials"}`, http.StatusUnauthorized)
 		return
 	}
 
